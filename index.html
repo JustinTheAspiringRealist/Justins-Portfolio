@@ -9,124 +9,169 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-      /* Lucide Font Face */
-      @font-face {
-        font-family: 'LucideIcons';
-        src: url(https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf) format('truetype');
-      }
-      .lucide {
-        font-family: 'LucideIcons';
-        font-style: normal; font-weight: normal; font-variant: normal;
-        text-rendering: auto; line-height: 1;
-        -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-        display: inline-block; vertical-align: middle;
-      }
-      /* Lucide icon definitions */
-      .icon-github::before { content: "\F03F"; }
-
-
       /* --- Consolidated Styles --- */
-       body { font-family: 'Inter', sans-serif; background-color: #1a1a2e; color: #e0e0e0; }
-       ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #1a1a2e; } ::-webkit-scrollbar-thumb { background-color: #4a148c; border-radius: 10px; border: 2px solid #1a1a2e; }
-       /* Keep section header style for Contact section */
-       .section-header { @apply text-3xl font-bold mb-6 text-purple-300; }
-       /* Apply pointer cursor to all copy triggers */
-       #email-link, #github-link, #project1-link, #project2-link { @apply cursor-pointer text-purple-300 hover:text-purple-200 transition-colors duration-200; }
-       /* Keep normal link styles for actual links if any remain */
-       a { @apply text-purple-300 hover:text-purple-200 transition-colors duration-200; }
-       /* Style spans acting as buttons */
-       .span-btn { @apply bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 inline-flex items-center gap-2 cursor-pointer; }
-       .span-btn-outline { @apply bg-transparent border border-purple-700 text-purple-300 hover:bg-purple-700 hover:text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 inline-flex items-center gap-2 cursor-pointer; }
-       /* Add relative positioning for tooltip context */
-       .project-card { @apply bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-700 hover:border-purple-500 transition-colors duration-300 relative; }
-       .contact-card { @apply bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700 text-center relative; }
-       .tooltip { position: absolute; display: none; background-color: #2a2a3e; color: #e0e0e0; padding: 6px 12px; border-radius: 6px; font-size: 0.875rem; border: 1px solid #4a148c; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 100; cursor: pointer; white-space: nowrap; }
-       .tooltip:hover { background-color: #3a3a4e; }
-       /* --- End Consolidated Styles --- */
 
+      /* Base Body & Scrollbar Styling */
+       body {
+        font-family: 'Inter', sans-serif;
+        background-color: #1a1a2e; /* Dark blue-purple background */
+        color: #e0e0e0; /* Light gray text for contrast */
+       }
+       ::-webkit-scrollbar { width: 8px; }
+       ::-webkit-scrollbar-track { background: #1a1a2e; }
+       ::-webkit-scrollbar-thumb {
+        background-color: #4a148c; /* Dark purple scrollbar thumb */
+        border-radius: 10px;
+        border: 2px solid #1a1a2e; /* Creates a 'floating' thumb effect */
+       }
+
+       /* Typography & Links */
+       .section-header {
+        @apply text-3xl font-bold mb-6 text-purple-300; /* Light purple for headers */
+       }
+       a { /* General link styling */
+        @apply text-purple-300 hover:text-purple-200 transition-colors duration-200;
+       }
+        /* Specific interactive elements that will trigger copy */
+       #email-link,
+       #github-link,
+       #project1-link,
+       #project2-link {
+        @apply cursor-pointer; /* Ensure cursor indicates interactivity */
+       }
+
+
+       /* Button-like Span Styles */
+       .span-btn { /* Solid button style */
+        @apply bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:shadow-sm active:translate-y-px;
+        min-width: 150px; /* Ensure buttons have some minimum width for feedback text */
+       }
+       .span-btn-outline { /* Outline button style */
+        @apply bg-transparent border border-purple-700 text-purple-300 hover:bg-purple-700 hover:text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 inline-flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:shadow-sm active:translate-y-px;
+        min-width: 150px; /* Ensure buttons have some minimum width for feedback text */
+       }
+       .contact-copy-item {
+         @apply text-purple-300 hover:text-purple-200 transition-colors duration-200 flex items-center gap-2 text-lg cursor-pointer;
+       }
+
+       /* Card Styles */
+       /* Styles for certification cards are applied directly in HTML using Tailwind classes. */
+       /* Example: bg-indigo-900 border-indigo-950 etc. */
+
+       .project-card,
+       .contact-card { /* Shared base styles for cards */
+        @apply bg-gray-800 rounded-lg shadow-lg border border-gray-700 relative;
+       }
+       .project-card {
+        @apply p-6 hover:border-purple-500 transition-colors duration-300;
+       }
+       .contact-card {
+        @apply p-8 text-center;
+       }
+       /* --- End Consolidated Styles --- */
     </style>
     <script>
-      // Keeping Tailwind config minimal for brevity, assume full config exists
-      tailwind.config = { theme: { extend: { /* colors, fontFamily */ } } };
+      // Tailwind CSS configuration (can be extended if needed)
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // You can add custom lilac/indigo shades here if needed
+              // 'lilac-indigo': '#5C5470', // Example custom color
+            }
+          }
+        }
+      };
     </script>
 </head>
 <body class="antialiased">
 
     <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 shadow-md">
-        <nav class="container mx-auto px-6 py-4 flex justify-end items-center"> <ul class="flex space-x-6">
-                <li><a href="#bio" class="hover:text-purple-300 transition-colors duration-200">Bio</a></li>
-                <li><a href="#certifications" class="hover:text-purple-300 transition-colors duration-200">Certifications</a></li>
-                <li><a href="#projects" class="hover:text-purple-300 transition-colors duration-200">Projects</a></li>
-                <li><a href="#contact" class="hover:text-purple-300 transition-colors duration-200">Contact</a></li>
+        <nav class="container mx-auto px-6 py-4 flex justify-end items-center">
+            <ul class="flex space-x-6">
+                <li><a href="#bio">Bio</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-
     <main class="container mx-auto px-6 py-12">
+
         <section id="bio" class="mb-24 pt-16 -mt-16">
             <div class="flex flex-col md:flex-row items-center gap-8 pt-6">
                 <div class="md:w-1/3 flex justify-center">
                     <img src="https://i.gyazo.com/8ff618c6188f509071009673b078009a.jpg"
                          alt="Profile picture of Justin Smith"
                          class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-purple-700 shadow-lg"
-                         onerror="this.onerror=null; this.src='https://placehold.co/300x300/2a2a3e/e0e0e0?text=Image+Error';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/256x256/2a2a3e/e0e0e0?text=Profile+Image'; this.alt='Placeholder profile image';">
                 </div>
                 <div class="md:w-2/3">
                     <h3 class="text-2xl font-semibold mb-3 text-white">Hello, I'm Justin Smith</h3>
                     <p class="text-lg leading-relaxed mb-4">
-                        Holding CompTIA A+, Network+, and Security+ certifications and a CSIT Vocational Degree, I gained practical IT support and troubleshooting experience during my technical training. I enjoy solving technical challenges and helping users.
+                        I currently hold the certifications A+, Network+, and Security+ from CompTIA, and a CSIT Vocational Degree. I gained practical IT support and troubleshooting experience during my technical training. I enjoy solving technical challenges and helping users.
                     </p>
                     <p class="text-lg leading-relaxed">
                         I also developed "Cognition Dashboard," a Notion planner focused on practical user needs. As a tech-savvy problem-solver and quick learner, I'm ready to contribute my foundational IT skills and proactive approach to an IT team.
                     </p>
-                    </div>
+                </div>
             </div>
         </section>
-
         <section id="certifications" class="mb-24 pt-16 -mt-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
-                <div class="bg-gray-800 p-5 rounded-lg shadow-md border border-gray-700">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 pt-6">
+                <div class="bg-indigo-900 p-5 rounded-lg border border-indigo-950 flex flex-col shadow-lg hover:border-indigo-500 transition-all duration-300">
                     <h3 class="text-xl font-semibold mb-2 text-white">CompTIA A+</h3>
-                    <p class="text-sm text-gray-400 mb-2">CompTIA | Nov 12, 2019</p>
-                    <p class="text-gray-300">Demonstrates core technical proficiency in troubleshooting, configuring, and supporting diverse hardware, software, and operating system environments.</p>
+                    <p class="text-sm text-gray-300">Issued: Nov 12, 2019</p>
+                    <p class="text-sm text-gray-300"><strong>Valid Through:</strong> Oct 25, 2026</p>
+                    <p class="text-sm text-gray-300 mb-2">(Renewed via CE on 2023-Oct-25)</p>
+                    <p class="text-gray-200 flex-grow">Demonstrates core technical proficiency in troubleshooting, configuring, and supporting diverse hardware, software, and operating system environments.</p>
                 </div>
-                <div class="bg-gray-800 p-5 rounded-lg shadow-md border border-gray-700">
+                <div class="bg-indigo-900 p-5 rounded-lg border border-indigo-950 flex flex-col shadow-lg hover:border-indigo-500 transition-all duration-300">
                     <h3 class="text-xl font-semibold mb-2 text-white">CompTIA Network+</h3>
-                    <p class="text-sm text-gray-400 mb-2">CompTIA | Feb 18, 2020</p>
-                     <p class="text-gray-300">Confirms practical skills in configuring, managing, and troubleshooting wired/wireless network devices and protocols to maintain network stability and connectivity.</p>
+                    <p class="text-sm text-gray-300">Issued: Feb 18, 2020</p>
+                    <p class="text-sm text-gray-300"><strong>Valid Through:</strong> Oct 25, 2026</p>
+                    <p class="text-sm text-gray-300 mb-2">(Renewed via CE on 2023-Oct-25)</p>
+                     <p class="text-gray-200 flex-grow">Confirms practical skills in configuring, managing, and troubleshooting wired/wireless network devices and protocols to maintain network stability and connectivity.</p>
                 </div>
-                 <div class="bg-gray-800 p-5 rounded-lg shadow-md border border-gray-700">
+                <div class="bg-indigo-900 p-5 rounded-lg border border-indigo-950 flex flex-col shadow-lg hover:border-indigo-500 transition-all duration-300">
                     <h3 class="text-xl font-semibold mb-2 text-white">CompTIA Security+</h3>
-                    <p class="text-sm text-gray-400 mb-2">CompTIA | Oct 27, 2020</p>
-                     <p class="text-gray-300">Validates essential cybersecurity knowledge and skills required to monitor environments, implement security solutions, and identify/mitigate security risks.</p>
+                    <p class="text-sm text-gray-300">Issued: Oct 27, 2020</p>
+                    <p class="text-sm text-gray-300"><strong>Valid Through:</strong> Oct 25, 2026</p>
+                    <p class="text-sm text-gray-300 mb-2">(Renewed via CE on 2023-Oct-25)</p>
+                     <p class="text-gray-200 flex-grow">Validates essential cybersecurity knowledge and skills required to monitor environments, implement security solutions, and identify/mitigate security risks.</p>
                  </div>
+                 <div class="bg-indigo-900 p-5 rounded-lg border border-indigo-950 flex flex-col shadow-lg hover:border-indigo-500 transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-white">MTA: Windows Operating System Fundamentals</h3>
+                    <p class="text-sm text-gray-300 mb-2">Microsoft | Certified 2020</p>
+                    <p class="text-gray-200 flex-grow">Validates fundamental knowledge of Windows operating systems, including installation, configuration, maintenance, and troubleshooting.</p>
+                </div>
             </div>
         </section>
-
         <section id="projects" class="mb-24 pt-16 -mt-16">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
                 <div class="project-card">
                     <img src="https://i.gyazo.com/7c3cdf7a2ac3bd357af6034b6e3346e4.png"
                          alt="Screenshot preview of the Cognition Dashboard Notion template"
-                         class="rounded-md mb-4 w-full h-48 object-cover"
-                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/2a2a3e/e0e0e0?text=Image+Not+Found';">
+                         class="rounded-md mb-4 w-full h-64 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/2a2a3e/e0e0e0?text=Project+Image'; this.alt='Placeholder project image';">
                     <h3 class="text-xl font-semibold mb-2 text-white">Cognition Dashboard</h3>
                     <p class="text-gray-300 mb-4">
                         A Notion-based planner tailored for neurodivergent users. Features robust task management with prioritization and scheduling, multiple filtered calendar views, automated project template duplication, and an organized knowledge base with sorting/grouping capabilities. Designed to enhance executive function and productivity within Notion.
                     </p>
                     <div class="flex space-x-4">
                         <span id="project1-link"
-                           data-url="https://mycelialroots.notion.site/Cognition-Dashboard-Template-1d277f6525cd8012ad99c20b2383de95?pvs=4"
-                           class="span-btn-outline"> View Template/Demo
+                           data-url="https://justintheaspiringrealist.notion.site/Cognition-Dashboard-template-v4-2-1db431b50c50807ab8c5e4919f2d7716?pvs=4"
+                           class="span-btn-outline">
+                           View Template/Demo
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block align-middle"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </span>
                     </div>
-                     <div id="project1-copy-tooltip" class="tooltip">Copy to Clipboard?</div>
                 </div>
                 <div class="project-card">
                      <img src="https://i.gyazo.com/791d0c6948dce9ff6d81752ad8ed1c86.png"
                          alt="Screenshot of AI Development Interface"
-                         class="rounded-md mb-4 w-full h-48 object-cover"
-                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/2a2a3e/e0e0e0?text=Image+Not+Found';">
+                         class="rounded-md mb-4 w-full h-64 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/2a2a3e/e0e0e0?text=Project+Image'; this.alt='Placeholder project image';">
                      <h3 class="text-xl font-semibold mb-2 text-white">AI Development Interface</h3>
                      <p class="text-gray-300 mb-4">
                         Created a versatile AI chat application designed for enhanced productivity and model testing. Connects via OpenRouter, allowing users to configure separate workspaces with distinct LLM models, system prompts, and conversation threads. Features include markdown support and integrated web search for providing up-to-date context to the AI.
@@ -134,62 +179,149 @@
                      <div class="flex space-x-4">
                          <span id="project2-link"
                             data-url="https://github.com/JustinTheAspiringRealist/AI-Development-Interface"
-                            class="span-btn"> <span class="lucide icon-github"></span> GitHub
+                            class="span-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block align-middle"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                            View GitHub Repo
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block align-middle ml-2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </span>
                      </div>
-                     <div id="project2-copy-tooltip" class="tooltip">Copy to Clipboard?</div>
                 </div>
             </div>
         </section>
-
         <section id="contact" class="mb-16 pt-16 -mt-16">
             <h2 class="section-header text-center w-full">
                 Contact Information
             </h2>
             <div class="contact-card">
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 pt-4">
-                    <span id="email-link" data-email="Justin.theaspiringrealist@gmail.com" class="flex items-center gap-2 text-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block align-middle w-5 h-5 mr-1"> <path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-10 7L2 8V6l10 7 10-7v2z"/>
-                        </svg>
+                    <span id="email-link" data-email="Justin.theaspiringrealist@gmail.com" class="contact-copy-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block align-middle mr-1"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         Justin.theaspiringrealist@gmail.com
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 opacity-75 hover:opacity-100"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     </span>
-                    <span id="github-link" data-url="https://github.com/JustinTheAspiringRealist" class="flex items-center gap-2 text-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block align-middle w-5 h-5 mr-1">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
+                    <span id="github-link" data-url="https://github.com/JustinTheAspiringRealist" class="contact-copy-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block align-middle mr-1"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                         GitHub Profile
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 opacity-75 hover:opacity-100"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     </span>
                 </div>
-                <div id="copy-tooltip" class="tooltip">Copy to Clipboard?</div>
-                <div id="github-copy-tooltip" class="tooltip">Copy to Clipboard?</div>
             </div>
         </section>
-
-    </main>
-
+        </main>
     <footer class="bg-gray-900 text-center py-6">
-        <p class="text-gray-400">&copy; <span id="current-year"></span> Justin Smith.</p>
+        <p class="text-gray-400">&copy; <span id="current-year"></span> Justin Smith. All rights reserved.</p>
     </footer>
-
     <script>
-        // Existing JS for year, smooth scroll, and tooltips unchanged
-         document.getElementById('current-year').textContent = new Date().getFullYear();
+        // This script handles dynamic year update, direct copy functionality, and smooth scrolling.
 
-        // --- Refactored Tooltip Logic ---
-        let activeTooltip = { element: null, timeout: null };
-        function hideActiveTooltip() { if (activeTooltip.element) { activeTooltip.element.style.display = 'none'; if (activeTooltip.element.textContent !== 'Copy to Clipboard?') { activeTooltip.element.textContent = 'Copy to Clipboard?'; } if (activeTooltip.timeout) { clearTimeout(activeTooltip.timeout); } activeTooltip = { element: null, timeout: null }; } }
-        function positionTooltip(tooltipElement, triggerElement) { const linkRect = triggerElement.getBoundingClientRect(); const container = triggerElement.closest('.relative, .project-card, .contact-card') || document.body; const containerRect = container.getBoundingClientRect(); tooltipElement.style.display = 'block'; const tooltipWidth = tooltipElement.offsetWidth; const tooltipHeight = tooltipElement.offsetHeight; tooltipElement.style.display = 'none'; let top = (linkRect.top + window.scrollY) - containerRect.top - tooltipHeight - 8; let left = (linkRect.left + window.scrollX) - containerRect.left + (linkRect.width / 2) - (tooltipWidth / 2); if (container === document.body) { top = linkRect.top + window.scrollY - tooltipHeight - 8; left = linkRect.left + window.scrollX + (linkRect.width / 2) - (tooltipWidth / 2); } if (top < 0 || (container !== document.body && top + containerRect.top < 0) ) { top = (linkRect.bottom + window.scrollY) - containerRect.top + 8; if (container === document.body) { top = linkRect.bottom + window.scrollY + 8; } } if (left < 0) left = 5; if (left + tooltipWidth > window.innerWidth) left = window.innerWidth - tooltipWidth - 5; tooltipElement.style.left = `${left}px`; tooltipElement.style.top = `${top}px`; tooltipElement.style.display = 'block'; }
-        function setupCopyTooltip(triggerId, tooltipId, dataAttributeName = 'data-url') { const trigger = document.getElementById(triggerId); const tooltip = document.getElementById(tooltipId); if (!trigger || !tooltip) { console.warn(`Tooltip setup failed for trigger: ${triggerId}, tooltip: ${tooltipId}`); return; } trigger.addEventListener('click', (e) => { e.stopPropagation(); hideActiveTooltip(); activeTooltip.element = tooltip; positionTooltip(tooltip, trigger); }); tooltip.addEventListener('click', (e) => { e.stopPropagation(); const textToCopy = trigger.getAttribute(dataAttributeName); console.log(`Attempting to copy from ${triggerId}:`, textToCopy); if (textToCopy && navigator.clipboard) { navigator.clipboard.writeText(textToCopy).then(() => { tooltip.textContent = 'Copied!'; activeTooltip.timeout = setTimeout(() => { hideActiveTooltip(); }, 1500); }).catch(err => { console.error(`Failed to copy from ${triggerId}: `, err); tooltip.textContent = 'Copy Failed!'; activeTooltip.timeout = setTimeout(() => { hideActiveTooltip(); }, 1500); }); } else { console.error(`Cannot copy: No ${dataAttributeName} found or clipboard API unavailable.`); tooltip.textContent = 'Cannot copy'; activeTooltip.timeout = setTimeout(() => { hideActiveTooltip(); }, 1500); } }); }
-        setupCopyTooltip('email-link', 'copy-tooltip', 'data-email');
-        setupCopyTooltip('github-link', 'github-copy-tooltip', 'data-url');
-        setupCopyTooltip('project1-link', 'project1-copy-tooltip', 'data-url');
-        setupCopyTooltip('project2-link', 'project2-copy-tooltip', 'data-url');
-        document.addEventListener('click', () => { hideActiveTooltip(); });
-        // --- End of Refactored Tooltip Logic ---
+        // Function to set the current year in the footer
+        function setCurrentYear() {
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        }
 
-        // Smooth scroll for Nav links only
-        document.querySelectorAll('header a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); const targetId = this.getAttribute('href'); const targetElement = document.querySelector(targetId); if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth' }); } }); });
+        // Fallback copy method using document.execCommand
+        function tryFallbackCopy(textToCopy, triggerElement, originalContent) {
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            textArea.style.position = "fixed"; 
+            textArea.style.top = "-9999px";    
+            textArea.style.left = "-9999px";   
+            textArea.style.width = "1px";      
+            textArea.style.height = "1px";     
+            textArea.style.opacity = "0";      
 
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            let success = false;
+            try {
+                success = document.execCommand('copy');
+                if (success) {
+                    triggerElement.innerHTML = 'Copied!'; 
+                } else {
+                    console.error(`Fallback copy command failed for ${triggerElement.id}.`);
+                    triggerElement.innerHTML = 'Failed!'; 
+                }
+            } catch (err) {
+                console.error(`Error during fallback copy for ${triggerElement.id}:`, err);
+                triggerElement.innerHTML = 'Error!'; 
+            }
+            document.body.removeChild(textArea);
+            setTimeout(() => { triggerElement.innerHTML = originalContent; }, 1500);
+        }
+
+        // Sets up event listeners for direct copy-to-clipboard functionality on an element.
+        function setupDirectCopy(triggerId, dataAttributeName = 'data-url', isContactItem = false) {
+            const triggerElement = document.getElementById(triggerId);
+
+            if (!triggerElement) {
+                console.warn(`Direct copy setup failed: Element not found for triggerId '${triggerId}'.`);
+                return;
+            }
+            
+            // Store original content, including icons
+            const originalContent = triggerElement.innerHTML;
+
+            triggerElement.addEventListener('click', (event) => {
+                event.stopPropagation(); 
+                const textToCopy = triggerElement.getAttribute(dataAttributeName);
+
+                if (!textToCopy) {
+                    console.error(`Cannot copy: No ${dataAttributeName} attribute found on #${triggerId}.`);
+                    triggerElement.innerHTML = 'No Data';
+                    setTimeout(() => { triggerElement.innerHTML = originalContent; }, 1500);
+                    return;
+                }
+
+                // Attempt modern clipboard API first
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        triggerElement.innerHTML = isContactItem ? 'Copied!' : 'Link Copied!';
+                        setTimeout(() => { triggerElement.innerHTML = originalContent; }, 1500);
+                    }).catch(err => {
+                        console.warn(`Modern clipboard writeText() failed for ${triggerId}: ${err.name} - ${err.message}. Attempting fallback.`);
+                        tryFallbackCopy(textToCopy, triggerElement, originalContent);
+                    });
+                } else {
+                    // If modern API is not available at all
+                    console.warn(`Modern clipboard API not available for ${triggerId}. Attempting fallback.`);
+                    tryFallbackCopy(textToCopy, triggerElement, originalContent);
+                }
+            });
+        }
+
+        // --- Smooth Scroll for Navigation Links ---
+        function setupSmoothScroll() {
+            document.querySelectorAll('header nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (event) {
+                    event.preventDefault(); 
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+
+        // --- Document Ready / Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setCurrentYear();
+            console.log(`Clipboard API check: window.isSecureContext is ${window.isSecureContext}.`);
+
+            // Setup direct copy for project links
+            setupDirectCopy('project1-link', 'data-url');
+            setupDirectCopy('project2-link', 'data-url');
+
+            // Setup direct copy for contact information
+            setupDirectCopy('email-link', 'data-email', true);
+            setupDirectCopy('github-link', 'data-url', true);
+            
+        });
     </script>
 
 </body>
